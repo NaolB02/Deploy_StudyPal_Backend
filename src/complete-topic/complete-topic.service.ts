@@ -5,9 +5,9 @@ import { CompleteTopic } from './schema/complete-topic.schema';
 
 @Injectable()
 export class CompleteTopicService {
-    constructor(
-        @InjectModel('CompleteTopic') private readonly completeTopicModel: Model<CompleteTopic>
-    ){}
+    // constructor(
+    //     @InjectModel('CompleteTopic') private readonly completeTopicModel: Model<CompleteTopic>
+    // ){}
 
     
 
