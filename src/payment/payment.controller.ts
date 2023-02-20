@@ -5,12 +5,11 @@ import { JwtGuard } from 'src/auth/guard';
 import { User } from 'src/auth/schema/user.schema';
 import { PaymentService } from './payment.service';
 
-@UseGuards(JwtGuard)
 @Controller('payment')
 export class PaymentController {
     constructor(private readonly paymentService: PaymentService){}
 
-
+    @UseGuards(JwtGuard)
     @Post('deposit')
     async deposit(@GetUser() user: User, @Body() body){
         // console.log(user, "from the deposit controller")
