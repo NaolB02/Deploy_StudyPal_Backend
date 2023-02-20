@@ -11,7 +11,7 @@ export class CompleteTopicService {
     ){}
 
     async getCompletedTopics(user: User): Promise<CompleteTopic[]> {
-        const filter = { owner: user._id }
+        const filter = { tutor: user._id }
         const theTopics = await this.completeTopicModel.find(filter);
         return theTopics;
     }
