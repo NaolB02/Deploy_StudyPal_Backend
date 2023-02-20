@@ -27,7 +27,7 @@ export class AskedTopicController {
         return await this.askedTopicService.apply(user, body.id);
     }
 
-    @Get('get-applicants')
+    @Put('get-applicants')
     async getApplicants(@Body() body){
         return this.askedTopicService.get_applicants(body.id)
     }
