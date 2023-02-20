@@ -5,6 +5,7 @@ import { PendingTopicModule } from './pending-topic/pending-topic.module';
 import { CompleteTopicModule } from './complete-topic/complete-topic.module';
 import { AskedTopicModule } from './asked-topic/asked-topic.module';
 import { ConfigModule } from '@nestjs/config/dist/config.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { ConfigModule } from '@nestjs/config/dist/config.module';
     CompleteTopicModule,
     ConfigModule.forRoot({
       isGlobal: true,
-    })
+    }),
+    ProfileModule
   ],
 
 })

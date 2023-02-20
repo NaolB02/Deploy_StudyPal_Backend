@@ -1,8 +1,6 @@
 import { Body, Controller, Delete, Get, Patch, Post, Put, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { AskedTopicService } from './asked-topic.service';
 import { CreateAskedTopicDto } from './dto/createAskedTopic.dto';
-import { PassportModule } from '@nestjs/passport';
 import { JwtGuard } from 'src/auth/guard';
 import { GetUser } from 'src/auth/decorator';
 import { User } from 'src/auth/schema/user.schema';
