@@ -10,10 +10,14 @@ export class ProfileService {
         @InjectModel('User') private readonly userModel: Model<User>
     ) {}
 
-    async viewProfile(user: User) : Promise<User> {
+    async viewProfile(user: User) {
         const userId = user._id
         const filter = { _id: userId }
         const profileOwner = await this.userModel.findOne(filter);
+
+        delete profileOwner.password
+        delete profileOwner._id
+
         return profileOwner
     }
 

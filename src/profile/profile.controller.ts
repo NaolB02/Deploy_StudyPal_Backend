@@ -11,7 +11,7 @@ export class ProfileController {
     constructor( private profileServ: ProfileService){}
 
     @Get('view-profile')
-    async viewProfile(@GetUser() user: User) : Promise<User> {
+    async viewProfile(@GetUser() user: User) {
         return await this.profileServ.viewProfile(user);
     }
 
