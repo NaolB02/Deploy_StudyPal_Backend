@@ -63,8 +63,6 @@ export class AskedTopicService {
         for (let applicantId of cur_topic.applicants){
             let app_filter = {_id : applicantId}
             let applicant = await this.userModel.findOne(app_filter)
-            console.log(applicant , "is the applicant found")
-            // console.log(applicantId, "applicant Id")
             foundApplicants.push(applicant)
         }
 

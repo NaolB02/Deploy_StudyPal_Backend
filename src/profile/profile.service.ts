@@ -13,10 +13,12 @@ export class ProfileService {
     async viewProfile(user: User) {
         const userId = user._id
         const filter = { _id: userId }
-        const profileOwner = await this.userModel.findOne(filter);
+        let profileOwner = await this.userModel.findOne(filter);
 
         delete profileOwner.password
-        delete profileOwner._id
+        // delete profileOwner[_id]
+
+        console.log(profileOwner.password)
 
         return profileOwner
     }
@@ -25,6 +27,11 @@ export class ProfileService {
         const filter = { _id: user._id };
         const update = editProf;
         await this.userModel.findOneAndUpdate(filter, update);
-        return await this.userModel.findOne(filter);
+        let profileOwner = await this.userModel.findOne(filter);
+
+        delete profileOwner.password
+        delete profileOwner._id
+
+        return profileOwner
     }
 }
