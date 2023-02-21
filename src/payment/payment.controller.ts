@@ -26,7 +26,7 @@ export class PaymentController {
     @UseGuards(JwtGuard)
     @Patch('withdraw')
     async withdraw(@GetUser() user: User, @Body() body){
-        return await this.paymentService.withdraw(user, body.accountName, body.accountNumber, body.amount, body.bankName)
+        return await this.paymentService.withdraw(user, body.accountName, body.accountNumber, body.amount, body.selectedBank)
     }
 
 }
