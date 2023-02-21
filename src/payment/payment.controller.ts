@@ -19,7 +19,7 @@ export class PaymentController {
     }
     @Get('verify-transaction/:id')
     async verifyTransaction(@Param('id') id){
-        console.log("I got called")
+        console.log(id)
         return await this.paymentService.verifyTransaction(id);
     }
 

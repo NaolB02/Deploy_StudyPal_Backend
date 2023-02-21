@@ -20,8 +20,8 @@ export class PaymentService {
         const CHAPA_URL = "https://api.chapa.co/v1/transaction/initialize"
         const CHAPA_AUTH = 'CHASECK_TEST-DQAZSfgpeA9jV6r3TLNEICmgBhQpCQsq'
 
-        const CALLBACK_URL = "https://deploystudypalbackend-development.up.railway.app/payment/verify-transaction"
-        const RETURN_URL = "http://localhost:4200/profile"
+        const CALLBACK_URL = "https://deploystudypalbackend-development.up.railway.app/payment/verify-transaction/"
+        const RETURN_URL = "http://localhost:4200/Profile"
         const config = {
             headers: {
                 Authorization: `Bearer ${CHAPA_AUTH}`
