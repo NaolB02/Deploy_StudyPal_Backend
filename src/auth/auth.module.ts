@@ -10,7 +10,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 @Module({
   imports: [ 
   JwtModule.register({
-    signOptions: { expiresIn: '3600s' },
+    signOptions: { expiresIn: '3600' },
   }), MongooseModule.forFeature([{name:"User", schema: UserSchema}])],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],  
