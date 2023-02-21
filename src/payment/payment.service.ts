@@ -80,4 +80,57 @@ export class PaymentService {
          }) 
          .catch((err) => console.log("Payment can't be verfied", err))
     }
+
+    async withdraw(user: User , account_name: string, account_number: string, amount: number, selectedBank: string) {
+
+        const filter = { _id: user._id}
+        const walletOwner = await this.userModel.findOne(filter)
+        const curWallet = walletOwner.walletBalance;
+
+        if (amount > curWallet) {
+            return "Amount Exceeded"
+        }
+
+        const REF_ = "ref-studypal3478-" + Date.now()
+        const CHAPA_AUTH = 'CHASECK_TEST-DQAZSfgpeA9jV6r3TLNEICmgBhQpCQsq'
+        const config = {
+            headers: {
+                Authorization: `Bearer ${CHAPA_AUTH}`
+            }
+        }
+
+        const bankList = await axios.get("https://api.chapa.co/v1/banks", config)
+            .then((response) => {
+                return response.data
+            }) 
+            .catch((err) => console.log(err))
+
+        const len = bankList.length
+        let bank_code
+
+        for(let i = 0; i < len; i++){
+            if (bankList[i]['name'] === selectedBank){
+                bank_code = bankList[i]['id']
+                break
+            }
+        }
+
+        const data = {
+            account_name, 
+            account_number,
+            amount,
+            currency: 'ETB',
+            reference: REF_,
+            bank_code,
+        }
+
+        return await axios.post('https://api.chapa.co/v1/transfers', data, config)
+            .then((response) => {
+                this.updateWallet((0 - amount), user._id)
+                return response.data
+            })
+            .catch((err) => console.log(err))
+        
+
+    }
 }

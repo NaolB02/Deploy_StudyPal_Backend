@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { Get, Param, UseGuards } from '@nestjs/common/decorators';
+import { Get, Param, Patch, UseGuards } from '@nestjs/common/decorators';
 import { GetUser } from 'src/auth/decorator';
 import { JwtGuard } from 'src/auth/guard';
 import { User } from 'src/auth/schema/user.schema';
@@ -21,6 +21,12 @@ export class PaymentController {
     async verifyTransaction(@Param('id') id){
         console.log(id)
         return await this.paymentService.verifyTransaction(id);
+    }
+
+    @UseGuards(JwtGuard)
+    @Patch('withdraw')
+    async withdraw(@GetUser() user: User, @Body() body){
+        return await this.paymentService.withdraw(user, body.accountName, body.accountNumber, body.amount, body.bankName)
     }
 
 }
