@@ -105,12 +105,15 @@ export class PaymentService {
             }) 
             .catch((err) => console.log(err))
 
-        const len = bankList.length
-        let bank_code
+        const len = 8
+        let bank_code;
+
+        console.log(bankList, selectedBank, len)
+        console.log(typeof bankList.data)
 
         for(let i = 0; i < len; i++){
-            if (bankList[i]['name'] === selectedBank){
-                bank_code = bankList[i]['id']
+            if (bankList.data[i].name === selectedBank){
+                bank_code = bankList.data[i].id
                 break
             }
         }
@@ -124,12 +127,15 @@ export class PaymentService {
             bank_code,
         }
 
+        this.updateWallet((0 - amount), user._id)
+
+        console.log(data)
         return await axios.post('https://api.chapa.co/v1/transfers', data, config)
             .then((response) => {
-                this.updateWallet((0 - amount), user._id)
+                
                 return response.data
             })
-            .catch((err) => console.log(err))
+            .catch((err) => console.log(err)) //log err
         
 
     }

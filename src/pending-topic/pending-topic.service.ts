@@ -59,11 +59,11 @@ export class PendingTopicService {
         const cur_topic = await this.pendingTopicModel.findOne(filter)
 
         if (!cur_topic){
-            return { message: "Session is terminated" }
+            return { status: false }
         }
 
         if(!cur_topic.end){
-            return { message: "Session has ended" }
+            return { status: false }
         }
 
         const curtime = Date.now()
@@ -85,7 +85,10 @@ export class PendingTopicService {
 
         if (moneyCheck > ownerWallet) {
             this.endSession(user, topicId)
-        } 
+            return { status: false }
+        } else {
+            return { status: true}
+        }
 
     }
 
